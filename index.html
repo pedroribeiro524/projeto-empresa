@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedrotech</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --neon: #00f0ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle, #0a1a3f, #050816);
+    color: white;
+}
+
+/* NAV */
+nav {
+    position: fixed;
+    width: 100%;
+    padding: 20px 50px;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    color: var(--neon);
+    font-size: 3rem;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: var(--neon);
+    border: none;
+    cursor: pointer;
+}
+
+/* LOGIN & APP */
+.login-screen, .app-screen {
+    display: none;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* CRIADORES */
+.creators {
+    display: none;
+    padding-top: 120px;
+    text-align: center;
+}
+
+.card {
+    margin-top: 20px;
+    padding: 20px;
+    background: #0a1a3f;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00f0ff55;
+}
+
+/* INPUT */
+input {
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    background: #0a1a3f;
+    border: none;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+    <h2>Pedrotech</h2>
+    <ul>
+        <li><a href="#" onclick="goHome()">Início</a></li>
+        <li><a href="#" onclick="openCreators()">Criadores</a></li>
+    </ul>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="hero">
+    <div>
+        <h1>NeonTech</h1>
+        <button class="btn" onclick="openLogin()">Começar</button>
+    </div>
+</div>
+
+<!-- CRIADORES -->
+<div id="creators" class="creators">
+    <h1>Criadores</h1>
+    <div class="card">
+        <h2>Pedro</h2>
+        <p>Fundador & Desenvolvedor</p>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="login-screen">
+    <h2>Login Pedrotech</h2>
+    <input type="text" id="username" placeholder="Nome">
+    <input type="password" id="password" placeholder="Senha">
+    <button class="btn" onclick="register()">Criar Conta</button>
+    <button class="btn" onclick="login()">Entrar</button>
+</div>
+
+<!-- APP -->
+<div id="app" class="app-screen">
+    <h2>Pedrotech</h2>
+    <p>Ainda está em desenvolvimento 🚧</p>
+</div>
+
+<script>
+function hideAll() {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("app").style.display = "none";
+    document.getElementById("creators").style.display = "none";
+}
+
+function goHome(){
+    hideAll();
+    document.getElementById("home").style.display = "flex";
+}
+
+function openLogin() {
+    hideAll();
+    document.getElementById("login").style.display = "flex";
+}
+
+function openCreators(){
+    hideAll();
+    document.getElementById("creators").style.display = "block";
+}
+
+function register() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user && pass){
+        localStorage.setItem("user", user);
+        localStorage.setItem("pass", pass);
+        alert("Conta criada!");
+    } else {
+        alert("Preencha tudo");
+    }
+}
+
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user === localStorage.getItem("user") &&
+       pass === localStorage.getItem("pass")){
+        hideAll();
+        document.getElementById("app").style.display = "flex";
+    } else {
+        alert("Login inválido");
+    }
+}
+</script>
+
+</body>
+</html>
